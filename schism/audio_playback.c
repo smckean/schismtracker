@@ -1284,6 +1284,7 @@ static int _audio_open(const char *driver_spec, int verbose)
 	if (SDL_InitSubSystem(SDL_INIT_AUDIO) < 0)
 		return 0;
 
+#if 0
 	/* This is needed in order to coax alsa into actually respecting the buffer size, since it's evidently
 	ignored entirely for "fake" devices such as "default" -- which SDL happens to use if no device name
 	is set. (see SDL_alsa_audio.c: http://tinyurl.com/ybf398f)
@@ -1294,6 +1295,7 @@ static int _audio_open(const char *driver_spec, int verbose)
 		if (!dev || !*dev)
 			put_env_var("AUDIODEV", "hw");
 	}
+#endif
 
 	/* ... THIS is needed because, if the buffer size isn't a power of two, the dsp driver will punt since
 	it's not nice enough to fix it for us. (contrast alsa, which is TOO nice and fixes it even when we
